@@ -174,6 +174,6 @@ def reconstruct_input_image(input_data, predicted_region):
     j = np.where(mask_j == 50)[0][0] - offset
 
     full_image = input_data.copy()
-    full_image[j:j+h, i:i+w] = predicted_region
+    full_image[j+offset:j+h-offset, i+offset:i+w-offset] = predicted_region[offset:-offset,offset:-offset]
 
     return full_image
