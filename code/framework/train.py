@@ -5,6 +5,13 @@ import tensorflow as tf
 
 from framework.logs import create_logs, create_inpainted_image_logger
 
+def normalize(x):
+    """
+    Normalize a list of sample image data in the range of 0 to 1
+    : x: List of image data.  The image shape is (32, 32, 3)
+    : return: Numpy array of normalized data
+    """
+    return np.array((x - np.min(x)) / (np.max(x) - np.min(x)))
 
 def set_optimizer_for_model(model, loss_func, learning_rate=1e-3):
     optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
@@ -87,7 +94,7 @@ def test_model(
                     test_folder, 
                     "result_{:02d}.png".format(data_idx)
                 ),
-                reconstructed_image
+                normalize(reconstructed_image)
             )
 
     num_data   = data_idx + 1
