@@ -69,13 +69,12 @@ def test_model(
     ):
 
     mean_loss = 0.0
-    
-    checkpoint_dir = os.path.join(out_dir, "model")
-    latest = tf.train.latest_checkpoint(checkpoint_dir)
-    model.load_weights(latest)
-    
+        
     test_folder = os.path.join(out_dir, "test")
 
+    model.load_weights(os.path.join(out_dir, "model/weights.ckpt")).expect_partial()
+
+    
     if not os.path.exists(test_folder):
         os.makedirs(test_folder)
 
