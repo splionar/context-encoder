@@ -8,7 +8,7 @@ from tensorflow.keras.models import Sequential
 from random import randint
 
 
-def crop_image(img, random=False):
+def crop_image(img, random=True):
     """
     Takes an image as input and returns a copy of it with a 
     missing region, as well as the corresponding missing region
