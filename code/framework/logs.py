@@ -4,13 +4,6 @@ import os
 import tensorflow as tf
 from tensorflow.keras.callbacks import TensorBoard, LambdaCallback, LearningRateScheduler, CSVLogger
 
-def normalize(x):
-    """
-    Normalize a list of sample image data in the range of 0 to 1
-    : x: List of image data.  The image shape is (32, 32, 3)
-    : return: Numpy array of normalized data
-    """
-    return np.array((x - np.min(x)) / (np.max(x) - np.min(x)))
 
 def create_tensorboard_logger(log_dir="logs"):
     return TensorBoard(
@@ -54,7 +47,7 @@ def create_inpainted_image_logger(
                     os.path.join(
                         log_dir, "image", name + "_example_{}.png".format(i)
                     ),
-                    normalize(reconstructed_image[i,::])
+                    reconstructed_image[i,::]
                 )
             
             break
