@@ -163,6 +163,11 @@ def reconstruct_input_image(input_data, predicted_region):
     """
     offset = 7
 
+    def normalize(x):
+        return np.array((x - np.min(x)) / (np.max(x) - np.min(x)))
+    
+    predicted_region = normalize(predicted_region)
+    
     h, w, _ = np.shape(predicted_region)
 
     mask = np.sum(input_data, axis=2) == 0
